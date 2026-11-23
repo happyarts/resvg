@@ -17,6 +17,9 @@ This changelog also contains important changes in dependencies.
 
 ### Fixed
 
+- Keywords with capitals are now read without regard to case, as CSS does: `srgb` and
+  `linearrgb` in `color-interpolation` and `color-interpolation-filters`, `crispedges`,
+  `optimizespeed` and others in `shape-rendering`, `text-rendering` and `image-rendering`.
 - Orientation of `orient="auto"` markers next to Bézier control points that coincide with their
   vertex, at the shared vertex of closed subpaths, and next to zero-length segments. (#1173)
 - Default filter primitive subregion: a primitive without `x`, `y`, `width` or `height` now uses

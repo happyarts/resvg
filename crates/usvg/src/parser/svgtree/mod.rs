@@ -1076,39 +1076,57 @@ impl<'a, 'input: 'a> FromValue<'a, 'input> for SpreadMethod {
     }
 }
 
+/// The value of the keyword `value` names in `keywords`. CSS keywords are
+/// ASCII case-insensitive, so `crispedges` names `crispEdges`.
+pub(crate) fn keyword<T: Copy>(value: &str, keywords: &[(&str, T)]) -> Option<T> {
+    keywords
+        .iter()
+        .find(|(name, _)| name.eq_ignore_ascii_case(value))
+        .map(|(_, keyword)| *keyword)
+}
+
 impl<'a, 'input: 'a> FromValue<'a, 'input> for ShapeRendering {
     fn parse(_: SvgNode, _: AId, value: &str) -> Option<Self> {
-        match value {
-            "optimizeSpeed" => Some(ShapeRendering::OptimizeSpeed),
-            "crispEdges" => Some(ShapeRendering::CrispEdges),
-            "auto" | "geometricPrecision" => Some(ShapeRendering::GeometricPrecision),
-            _ => None,
-        }
+        keyword(
+            value,
+            &[
+                ("optimizeSpeed", ShapeRendering::OptimizeSpeed),
+                ("crispEdges", ShapeRendering::CrispEdges),
+                ("auto", ShapeRendering::GeometricPrecision),
+                ("geometricPrecision", ShapeRendering::GeometricPrecision),
+            ],
+        )
     }
 }
 
 impl<'a, 'input: 'a> FromValue<'a, 'input> for TextRendering {
     fn parse(_: SvgNode, _: AId, value: &str) -> Option<Self> {
-        match value {
-            "optimizeSpeed" => Some(TextRendering::OptimizeSpeed),
-            "auto" | "optimizeLegibility" => Some(TextRendering::OptimizeLegibility),
-            "geometricPrecision" => Some(TextRendering::GeometricPrecision),
-            _ => None,
-        }
+        keyword(
+            value,
+            &[
+                ("optimizeSpeed", TextRendering::OptimizeSpeed),
+                ("auto", TextRendering::OptimizeLegibility),
+                ("optimizeLegibility", TextRendering::OptimizeLegibility),
+                ("geometricPrecision", TextRendering::GeometricPrecision),
+            ],
+        )
     }
 }
 
 impl<'a, 'input: 'a> FromValue<'a, 'input> for ImageRendering {
     fn parse(_: SvgNode, _: AId, value: &str) -> Option<Self> {
-        match value {
-            "auto" | "optimizeQuality" => Some(ImageRendering::OptimizeQuality),
-            "optimizeSpeed" => Some(ImageRendering::OptimizeSpeed),
-            "smooth" => Some(ImageRendering::Smooth),
-            "high-quality" => Some(ImageRendering::HighQuality),
-            "crisp-edges" => Some(ImageRendering::CrispEdges),
-            "pixelated" => Some(ImageRendering::Pixelated),
-            _ => None,
-        }
+        keyword(
+            value,
+            &[
+                ("auto", ImageRendering::OptimizeQuality),
+                ("optimizeQuality", ImageRendering::OptimizeQuality),
+                ("optimizeSpeed", ImageRendering::OptimizeSpeed),
+                ("smooth", ImageRendering::Smooth),
+                ("high-quality", ImageRendering::HighQuality),
+                ("crisp-edges", ImageRendering::CrispEdges),
+                ("pixelated", ImageRendering::Pixelated),
+            ],
+        )
     }
 }
 

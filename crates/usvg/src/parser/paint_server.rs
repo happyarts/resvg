@@ -226,8 +226,10 @@ fn convert_pattern(
 }
 
 pub(crate) fn convert_color_interpolation(node: SvgNode) -> filter::ColorInterpolation {
-    match node.find_attribute(AId::ColorInterpolation) {
-        Some("linearRGB") => filter::ColorInterpolation::LinearRGB,
+    match node.find_attribute::<&str>(AId::ColorInterpolation) {
+        Some(value) if value.eq_ignore_ascii_case("linearRGB") => {
+            filter::ColorInterpolation::LinearRGB
+        }
         _ => filter::ColorInterpolation::SRGB,
     }
 }

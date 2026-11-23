@@ -19,15 +19,17 @@ use crate::{
 use super::OptionLog;
 use super::converter::{self, SvgColorExt};
 use super::paint_server::{convert_units, resolve_number};
-use super::svgtree::{AId, EId, FromValue, SvgNode};
+use super::svgtree::{AId, EId, FromValue, SvgNode, keyword};
 
 impl<'a, 'input: 'a> FromValue<'a, 'input> for filter::ColorInterpolation {
     fn parse(_: SvgNode, _: AId, value: &str) -> Option<Self> {
-        match value {
-            "sRGB" => Some(filter::ColorInterpolation::SRGB),
-            "linearRGB" => Some(filter::ColorInterpolation::LinearRGB),
-            _ => None,
-        }
+        keyword(
+            value,
+            &[
+                ("sRGB", filter::ColorInterpolation::SRGB),
+                ("linearRGB", filter::ColorInterpolation::LinearRGB),
+            ],
+        )
     }
 }
 

@@ -291,6 +291,7 @@ use crate::render;
 #[test] fn filters_feTurbulence_type_eq_fractalNoise() { assert_eq!(render("tests/filters/feTurbulence/type=fractalNoise"), 0); }
 #[test] fn filters_feTurbulence_type_eq_invalid() { assert_eq!(render("tests/filters/feTurbulence/type=invalid"), 0); }
 #[test] fn filters_filter_color_interpolation_filters_eq_sRGB() { assert_eq!(render("tests/filters/filter/color-interpolation-filters=sRGB"), 0); }
+#[test] fn filters_filter_color_interpolation_filters_eq_srgb_in_style() { assert_eq!(render("tests/filters/filter/color-interpolation-filters=srgb-in-style"), 0); }
 #[test] fn filters_filter_complex_order_and_xlink_href() { assert_eq!(render("tests/filters/filter/complex-order-and-xlink-href"), 0); }
 #[test] fn filters_filter_content_outside_the_canvas_2() { assert_eq!(render("tests/filters/filter/content-outside-the-canvas-2"), 0); }
 #[test] fn filters_filter_content_outside_the_canvas() { assert_eq!(render("tests/filters/filter/content-outside-the-canvas"), 0); }
@@ -927,6 +928,7 @@ use crate::render;
 #[test] fn painting_paint_order_trailing_data() { assert_eq!(render("tests/painting/paint-order/trailing-data"), 0); }
 #[test] fn painting_shape_rendering_auto_on_circle() { assert_eq!(render("tests/painting/shape-rendering/auto-on-circle"), 0); }
 #[test] fn painting_shape_rendering_crispEdges_on_circle() { assert_eq!(render("tests/painting/shape-rendering/crispEdges-on-circle"), 0); }
+#[test] fn painting_shape_rendering_crispedges_in_lowercase() { assert_eq!(render("tests/painting/shape-rendering/crispedges-in-lowercase"), 0); }
 #[test] fn painting_shape_rendering_geometricPrecision_on_circle() { assert_eq!(render("tests/painting/shape-rendering/geometricPrecision-on-circle"), 0); }
 #[test] fn painting_shape_rendering_inheritance() { assert_eq!(render("tests/painting/shape-rendering/inheritance"), 0); }
 #[test] fn painting_shape_rendering_on_horizontal_line() { assert_eq!(render("tests/painting/shape-rendering/on-horizontal-line"), 0); }
